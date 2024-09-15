@@ -1,21 +1,16 @@
 package ir.masouddabbaghi.eduregister.ui.activity
 
-import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import ir.masouddabbaghi.eduregister.R
+import android.view.View
+import dagger.hilt.android.AndroidEntryPoint
+import ir.masouddabbaghi.eduregister.databinding.ActivityAuthenticationBinding
+import ir.masouddabbaghi.eduregister.ui.base.BaseActivity
 
-class AuthenticationActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_authentication)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+@AndroidEntryPoint
+class AuthenticationActivity : BaseActivity() {
+    private lateinit var binding: ActivityAuthenticationBinding
+
+    override fun getLayoutResourceBinding(): View {
+        binding = ActivityAuthenticationBinding.inflate(layoutInflater)
+        return binding.root
     }
 }
