@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name_en">EduRegister</string>
+    <string name="app_name_en">Edu Register</string>
     <string name="app_name_fa">ثبت نام آموزشی</string>
+    <string name="app_description">اپلیکیشن ثبت نام دانش آموزان</string>
 
     <string name="connection_fail">مشکلی در اتصال به اینترنت به وجود آمده!</string>
     <string name="server_error_hint">هم اکنون سامانه با اختلال مواجه است. لطفا چند دقیقه دیگر تلاش کنید.</string>
+    <string name="app_version">Version %1$s</string>
 </resources>
