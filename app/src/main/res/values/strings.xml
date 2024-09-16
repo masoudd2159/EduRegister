@@ -7,18 +7,20 @@
     <string name="change_number"><u>نام کاربری ندارید؟  ثبت نام</u></string>
     <string name="connection_fail">مشکلی در اتصال به اینترنت به وجود آمده!</string>
     <string name="exit_toast_message">برای خروج از برنامه دو بار کلید بازگشت را فشار دهید !</string>
+    <string name="family">نام خانوادگی</string>
     <string name="hint_password">رمزعبور:</string>
     <string name="hint_username">نام کاربری :</string>
     <string name="login_hint">لطفاً برای ورود به سامانه نام کاربری و رمزعبور خود را وارد کنید.</string>
     <string name="login_into_app">ورود به اپلیکیشن</string>
     <string name="login_to_system">ورود به سامانه</string>
+    <string name="name">نام</string>
     <string name="password">رمزعبور</string>
-    <string name="server_error_hint">هم اکنون سامانه با اختلال مواجه است. لطفا چند دقیقه دیگر تلاش کنید.</string>
-    <string name="username">نام کاربری</string>
-    <string name="user_registration">ثبت نام کاربر</string>
+    <string name="password_error">لطفاً پسورد را به درستی وارد کنید !</string>
+    <string name="register">ثبت نام</string>
     <string name="registration_hint">لطفاً برای ثبت نام اطلاعات زیر را تکمیل کنید.</string>
     <string name="repeat_password">تکرار رمز عبور</string>
-    <string name="name">نام</string>
-    <string name="family">نام خانوادگی</string>
-    <string name="register">ثبت نام</string>
+    <string name="server_error_hint">هم اکنون سامانه با اختلال مواجه است. لطفا چند دقیقه دیگر تلاش کنید.</string>
+    <string name="user_registration">ثبت نام کاربر</string>
+    <string name="username">نام کاربری</string>
+    <string name="username_error">لطفاً نام کاربری را به درستی وارد کنید !</string>
 </resources>
