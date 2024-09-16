@@ -131,7 +131,7 @@
                     android:background="@color/transparent"
                     android:fontFamily="@font/yekan_bakh_regular"
                     android:gravity="center"
-                    android:hint="@string/username"
+                    android:hint="@string/email"
                     android:inputType="textEmailAddress"
                     android:maxLength="64"
                     android:singleLine="true"
@@ -341,11 +341,24 @@
             </carbon.widget.ConstraintLayout>
         </carbon.widget.ConstraintLayout>
 
+        <TextView
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:fontFamily="@font/yekan_bakh_light"
+            android:text="@string/login_user"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_input_registration" />
+
         <Space
             android:layout_width="0dp"
             android:layout_height="@dimen/_256sdp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_input_registration" />
+            app:layout_constraintTop_toBottomOf="@id/login" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

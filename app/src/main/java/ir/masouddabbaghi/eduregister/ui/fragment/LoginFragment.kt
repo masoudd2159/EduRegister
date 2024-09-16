@@ -63,12 +63,12 @@ class LoginFragment : Fragment() {
             }
 
             layoutLoginToApp.setOnClickListener {
-                val username = inputUsername.text.toString()
+                val email = inputEmail.text.toString()
                 val password = inputPassword.text.toString()
                 when {
-                    username.isEmpty() -> inputUsername.error = resources.getString(R.string.username_error)
+                    email.isEmpty() -> inputEmail.error = resources.getString(R.string.email_error)
                     password.isEmpty() -> inputPassword.error = resources.getString(R.string.password_error)
-                    else -> viewModel.fetchLogin(email = username, password = password)
+                    else -> viewModel.fetchLogin(email = email, password = password)
                 }
             }
 

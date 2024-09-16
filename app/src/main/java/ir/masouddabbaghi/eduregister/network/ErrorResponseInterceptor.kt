@@ -41,20 +41,38 @@ class ErrorResponseInterceptor
             code: Int,
         ) {
             responseBody(response)?.let { errorString ->
-                try {
-                    val responseError: ErrorResponse = Gson().fromJson(errorString, ErrorResponse.Model1::class.java)
-                    handleModel1Error(responseError as ErrorResponse.Model1, code)
-                } catch (e: JsonSyntaxException) {
-                    try {
-                        val responseError: ErrorResponse = Gson().fromJson(errorString, ErrorResponse.Model2::class.java)
-                        handleModel2Error(responseError as ErrorResponse.Model2, code)
-                    } catch (e: JsonSyntaxException) {
+                Log.d(ErrorResponseInterceptor::class.java.simpleName, "Raw error response: $errorString")
+
+                when {
+                    errorString.contains("\"status\"") && errorString.contains("\"title\"") -> {
                         try {
-                            val responseError: ErrorResponse = Gson().fromJson(errorString, ErrorResponse.Model3::class.java)
-                            handleModel3Error(responseError as ErrorResponse.Model3, code)
+                            val responseError = Gson().fromJson(errorString, ErrorResponse.Model1::class.java)
+                            handleModel1Error(responseError, code)
                         } catch (e: JsonSyntaxException) {
-                            Log.e(ErrorResponseInterceptor::class.java.simpleName, "Unknown error format: $errorString")
+                            Log.e(ErrorResponseInterceptor::class.java.simpleName, "Error parsing Model1: $e")
                         }
+                    }
+
+                    errorString.contains("\"errors\"") && !errorString.contains("\"Password\"") -> {
+                        try {
+                            val responseError = Gson().fromJson(errorString, ErrorResponse.Model2::class.java)
+                            handleModel2Error(responseError, code)
+                        } catch (e: JsonSyntaxException) {
+                            Log.e(ErrorResponseInterceptor::class.java.simpleName, "Error parsing Model2: $e")
+                        }
+                    }
+
+                    errorString.contains("\"errors\"") && errorString.contains("\"Password\"") -> {
+                        try {
+                            val responseError = Gson().fromJson(errorString, ErrorResponse.Model3::class.java)
+                            handleModel3Error(responseError, code)
+                        } catch (e: JsonSyntaxException) {
+                            Log.e(ErrorResponseInterceptor::class.java.simpleName, "Error parsing Model3: $e")
+                        }
+                    }
+
+                    else -> {
+                        Log.e(ErrorResponseInterceptor::class.java.simpleName, "Unknown error format: $errorString")
                     }
                 }
             }
@@ -81,6 +99,7 @@ class ErrorResponseInterceptor
             error: ErrorResponse.Model2,
             code: Int,
         ) {
+            Log.e(ErrorResponseInterceptor::class.java.simpleName, "format Model 2: $error")
             error.errors.forEach { errorDetail ->
                 Log.e(ErrorResponseInterceptor::class.java.simpleName, errorDetail)
                 showToast(errorDetail.trim())
