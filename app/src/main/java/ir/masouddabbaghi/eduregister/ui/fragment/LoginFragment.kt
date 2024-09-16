@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ir.masouddabbaghi.eduregister.R
 import ir.masouddabbaghi.eduregister.databinding.FragmentLoginBinding
@@ -44,6 +45,10 @@ class LoginFragment : Fragment() {
                     R.string.app_version,
                     requireContext().packageManager.getPackageInfo(requireContext().packageName, 0).versionName,
                 )
+
+            register.setOnClickListener {
+                findNavController().navigate(R.id.registerFragment)
+            }
         }
     }
 

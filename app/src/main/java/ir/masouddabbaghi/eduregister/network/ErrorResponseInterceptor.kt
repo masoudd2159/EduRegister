@@ -6,9 +6,10 @@ import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import ir.masouddabbaghi.eduregister.MyApplication.Companion.applicationContext
 import ir.masouddabbaghi.eduregister.R
-import ir.masouddabbaghi.eduregister.data.model.ErrorModel
+import ir.masouddabbaghi.eduregister.data.model.ErrorResponse
 import ir.masouddabbaghi.eduregister.data.storage.SharedPreferencesHelper
 import ir.masouddabbaghi.eduregister.ui.activity.SplashScreenActivity
 import okhttp3.Interceptor
@@ -28,35 +29,94 @@ class ErrorResponseInterceptor
             val response = chain.proceed(chain.request())
             val code = response.code
             if (code in 400..499) {
-                responseBody(response)?.also { errorString ->
-                    val responseError: ErrorModel = Gson().fromJson(errorString, ErrorModel::class.java)
-
-                    responseError.message.forEach { errorDetail ->
-                        val logMessage = "${errorDetail.field}: ${errorDetail.error}"
-                        Log.e(ErrorResponseInterceptor::class.java.simpleName, logMessage)
-                        showToast(logMessage.trim())
-                    }
-
-                    Log.e(ErrorResponseInterceptor::class.java.simpleName, "Error: ${responseError.error}")
-                    Log.e(ErrorResponseInterceptor::class.java.simpleName, "Status Code: ${responseError.statusCode}")
-
-                    if (code == 401) {
-                        sharedPreferencesHelper.clearSharedPreferences()
-                        val intent = Intent(applicationContext(), SplashScreenActivity::class.java)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        applicationContext().startActivity(intent)
-                    }
-                }
+                handleClientErrors(response, code)
+            } else if (code in 500..599) {
+                handleServerErrors(response)
             }
-
-            if (code in 500..599) {
-                responseBody(response)?.also { errorString ->
-                    Log.e(ErrorResponseInterceptor::class.java.simpleName, errorString)
-                    showToast(applicationContext().getString(R.string.server_error_hint))
-                }
-            }
-
             return response
+        }
+
+        private fun handleClientErrors(
+            response: Response,
+            code: Int,
+        ) {
+            responseBody(response)?.let { errorString ->
+                try {
+                    val responseError: ErrorResponse = Gson().fromJson(errorString, ErrorResponse.Model1::class.java)
+                    handleModel1Error(responseError as ErrorResponse.Model1, code)
+                } catch (e: JsonSyntaxException) {
+                    try {
+                        val responseError: ErrorResponse = Gson().fromJson(errorString, ErrorResponse.Model2::class.java)
+                        handleModel2Error(responseError as ErrorResponse.Model2, code)
+                    } catch (e: JsonSyntaxException) {
+                        try {
+                            val responseError: ErrorResponse = Gson().fromJson(errorString, ErrorResponse.Model3::class.java)
+                            handleModel3Error(responseError as ErrorResponse.Model3, code)
+                        } catch (e: JsonSyntaxException) {
+                            Log.e(ErrorResponseInterceptor::class.java.simpleName, "Unknown error format: $errorString")
+                        }
+                    }
+                }
+            }
+        }
+
+        private fun handleModel1Error(
+            error: ErrorResponse.Model1,
+            code: Int,
+        ) {
+            val logMessage = "Error: ${error.title}"
+            Log.e(ErrorResponseInterceptor::class.java.simpleName, logMessage)
+            showToast(logMessage.trim())
+
+            if (code == 401) {
+                sharedPreferencesHelper.clearSharedPreferences()
+                Intent(applicationContext(), SplashScreenActivity::class.java).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    applicationContext().startActivity(this)
+                }
+            }
+        }
+
+        private fun handleModel2Error(
+            error: ErrorResponse.Model2,
+            code: Int,
+        ) {
+            error.errors.forEach { errorDetail ->
+                Log.e(ErrorResponseInterceptor::class.java.simpleName, errorDetail)
+                showToast(errorDetail.trim())
+            }
+
+            if (code == 401) {
+                sharedPreferencesHelper.clearSharedPreferences()
+                Intent(applicationContext(), SplashScreenActivity::class.java).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    applicationContext().startActivity(this)
+                }
+            }
+        }
+
+        private fun handleModel3Error(
+            error: ErrorResponse.Model3,
+            code: Int,
+        ) {
+            val logMessage = "Error: ${error.title}"
+            Log.e(ErrorResponseInterceptor::class.java.simpleName, logMessage)
+            showToast(logMessage.trim())
+
+            if (code == 401) {
+                sharedPreferencesHelper.clearSharedPreferences()
+                Intent(applicationContext(), SplashScreenActivity::class.java).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    applicationContext().startActivity(this)
+                }
+            }
+        }
+
+        private fun handleServerErrors(response: Response) {
+            responseBody(response)?.let { errorString ->
+                Log.e(ErrorResponseInterceptor::class.java.simpleName, errorString)
+                showToast(applicationContext().getString(R.string.server_error_hint))
+            }
         }
 
         private fun responseBody(response: Response): String? {
