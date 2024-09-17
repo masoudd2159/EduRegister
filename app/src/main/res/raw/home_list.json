@@ -1,0 +1,28 @@
+{
+  "result": [
+    {
+      "id": 1,
+      "title": "لیست کاربران",
+      "icon": "user_group",
+      "color": "#EB6434"
+    },
+    {
+      "id": 2,
+      "title": "لیست دانش‌آموزان",
+      "icon": "mortarboard",
+      "color": "#EB6434"
+    },
+    {
+      "id": 3,
+      "title": "ثبت نام دانش‌آموز",
+      "icon": "user_edit",
+      "color": "#33B1FF"
+    },
+    {
+      "id": 4,
+      "title": "خروج از حساب کاریری",
+      "icon": "logout",
+      "color": "#FC2E20"
+    }
+  ]
+}

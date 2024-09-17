@@ -1,0 +1,19 @@
+{
+  "result": [
+    {
+      "id": 1,
+      "title": "Slider Image 1",
+      "image": "pic_1"
+    },
+    {
+      "id": 2,
+      "title": "Slider Image 2",
+      "image": "pic_2"
+    },
+    {
+      "id": 3,
+      "title": "Slider Image 3",
+      "image": "pic_3"
+    }
+  ]
+}

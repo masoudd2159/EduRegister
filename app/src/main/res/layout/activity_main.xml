@@ -1,9 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey_50"
+    android:fillViewport="true"
+    android:layoutDirection="ltr"
+    android:overScrollMode="never"
     tools:context=".ui.activity.MainActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layoutDirection="ltr">
+
+        <carbon.widget.ImageView
+            android:id="@+id/profile"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:layout_margin="@dimen/_12sdp"
+            android:layoutDirection="ltr"
+            android:padding="@dimen/_6sdp"
+            android:src="@drawable/user_2"
+            app:carbon_cornerRadius="@dimen/_14sdp"
+            app:carbon_stroke="@color/stroke"
+            app:carbon_strokeWidth="@dimen/_1sdp"
+            app:carbon_tint="@color/black"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/store_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:fontFamily="@font/yekan_bakh_semi_bold"
+            android:gravity="right"
+            android:text="@string/app_name_fa"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="@id/profile"
+            app:layout_constraintRight_toLeftOf="@id/profile"
+            app:layout_constraintTop_toTopOf="@id/profile" />
+
+        <carbon.widget.ImageView
+            android:id="@+id/app_logo"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:layout_margin="@dimen/_12sdp"
+            android:background="@color/colorPrimary"
+            android:padding="@dimen/_4sdp"
+            android:src="@drawable/student"
+            app:carbon_cornerRadius="@dimen/_14sdp"
+            app:carbon_tint="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <carbon.widget.ConstraintLayout
+            android:id="@+id/content_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_175sdp"
+            android:layoutDirection="ltr"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_logo">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                android:id="@+id/dots_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_16sdp"
+                app:dotsColor="@color/grey_3"
+                app:dotsCornerRadius="@dimen/_8sdp"
+                app:dotsSize="@dimen/_4sdp"
+                app:dotsSpacing="@dimen/_2sdp"
+                app:dotsWidthFactor="3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:progressMode="false"
+                app:selectedDotColor="@color/colorPrimary" />
+        </carbon.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_profile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layoutDirection="ltr"
+            android:overScrollMode="never"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/content_view_pager"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_home_list" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
