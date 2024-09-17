@@ -181,4 +181,12 @@ object Tools {
         val date = serverDateFormat.parse(serverDate)
         return outputDateFormat.format(date!!)
     }
+
+    fun formatJalaliDate(serverDate: String): String {
+        val dateParts = serverDate.split("/")
+        val year = dateParts[0]
+        val month = dateParts[1].padStart(2, '0')
+        val day = dateParts[2].padStart(2, '0')
+        return "$year-$month-$day"
+    }
 }

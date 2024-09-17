@@ -37,6 +37,7 @@ navigationFragmentKtx = "2.8.0"
 navigationUiKtx = "2.8.0"
 navSafeArgs = "2.8.0"
 okhttp = "5.0.0-alpha.14"
+persianDatePickerDialog = "1.8.0"
 retrofit = "2.11.0"
 sdpAndroid = "1.1.1"
 sspAndroid = "1.1.1"
@@ -78,6 +79,7 @@ logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-intercep
 lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+persian-date-picker-dialog = { group = "com.github.aliab", name = "Persian-Date-Picker-Dialog", version.ref = "persianDatePickerDialog" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 sdp-android = { group = "com.intuit.sdp", name = "sdp-android", version.ref = "sdpAndroid" }
 ssp-android = { group = "com.intuit.ssp", name = "ssp-android", version.ref = "sspAndroid" }

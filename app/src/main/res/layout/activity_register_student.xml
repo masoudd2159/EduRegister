@@ -1,9 +1,301 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey_50"
     tools:context=".ui.activity.RegisterStudentActivity">
+
+    <carbon.widget.ImageView
+        android:id="@+id/icon_back"
+        android:layout_width="@dimen/_28sdp"
+        android:layout_height="@dimen/_28sdp"
+        android:layout_margin="@dimen/_12sdp"
+        android:layoutDirection="ltr"
+        android:padding="@dimen/_6sdp"
+        android:src="@drawable/arrow_sharp"
+        app:carbon_cornerRadius="@dimen/_14sdp"
+        app:carbon_stroke="@color/stroke"
+        app:carbon_strokeWidth="@dimen/_1sdp"
+        app:carbon_tint="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/activity_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/yekan_bakh_semi_bold"
+        android:gravity="center"
+        android:text="@string/register_new_student"
+        android:textColor="@color/colorTextView"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintBottom_toBottomOf="@id/icon_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/icon_back" />
+
+    <carbon.widget.ConstraintLayout
+        android:id="@+id/layout_input_registration"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16sdp"
+        android:background="@color/white"
+        app:carbon_cornerRadius="@dimen/_18sdp"
+        app:carbon_elevation="@dimen/_4sdp"
+        app:carbon_elevationShadowColor="@color/grey_500"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/icon_back">
+
+        <carbon.widget.ConstraintLayout
+            android:id="@+id/layout_input_name"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginRight="@dimen/_12sdp"
+            android:background="@color/fillEditText"
+            app:carbon_cornerRadius="@dimen/_18sdp"
+            app:carbon_stroke="@color/stroke"
+            app:carbon_strokeWidth="@dimen/_1sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/input_name"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                android:autofillHints="name"
+                android:background="@color/transparent"
+                android:fontFamily="@font/yekan_bakh_regular"
+                android:gravity="center"
+                android:hint="@string/name"
+                android:inputType="textPersonName"
+                android:maxLength="100"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/hint"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </carbon.widget.ConstraintLayout>
+
+        <carbon.widget.ConstraintLayout
+            android:id="@+id/layout_input_lastname"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginRight="@dimen/_12sdp"
+            android:background="@color/fillEditText"
+            app:carbon_cornerRadius="@dimen/_18sdp"
+            app:carbon_stroke="@color/stroke"
+            app:carbon_strokeWidth="@dimen/_1sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_input_name">
+
+            <EditText
+                android:id="@+id/input_lastname"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                android:autofillHints="name"
+                android:background="@color/transparent"
+                android:fontFamily="@font/yekan_bakh_regular"
+                android:gravity="center"
+                android:hint="@string/family"
+                android:inputType="textPersonName"
+                android:maxLength="100"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/hint"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </carbon.widget.ConstraintLayout>
+
+        <carbon.widget.ConstraintLayout
+            android:id="@+id/layout_input_birthdate"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginRight="@dimen/_12sdp"
+            android:background="@color/fillEditText"
+            app:carbon_cornerRadius="@dimen/_18sdp"
+            app:carbon_stroke="@color/stroke"
+            app:carbon_strokeWidth="@dimen/_1sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_input_lastname">
+
+            <TextView
+                android:id="@+id/input_birthdate"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                android:background="@color/transparent"
+                android:fontFamily="@font/yekan_bakh_regular"
+                android:gravity="center"
+                android:hint="@string/brithdate"
+                android:onClick="showCalendar"
+                android:textColor="@color/black"
+                android:textColorHint="@color/hint"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </carbon.widget.ConstraintLayout>
+
+        <carbon.widget.ConstraintLayout
+            android:id="@+id/layout_input_gender"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginRight="@dimen/_12sdp"
+            android:background="@color/fillEditText"
+            app:carbon_cornerRadius="@dimen/_18sdp"
+            app:carbon_stroke="@color/stroke"
+            app:carbon_strokeWidth="@dimen/_1sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_input_birthdate">
+
+            <TextView
+                android:id="@+id/input_gender"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                android:background="@color/transparent"
+                android:fontFamily="@font/yekan_bakh_regular"
+                android:gravity="center"
+                android:hint="@string/gender"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/hint"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </carbon.widget.ConstraintLayout>
+
+        <carbon.widget.ConstraintLayout
+            android:id="@+id/layout_input_major"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginRight="@dimen/_12sdp"
+            android:background="@color/fillEditText"
+            app:carbon_cornerRadius="@dimen/_18sdp"
+            app:carbon_stroke="@color/stroke"
+            app:carbon_strokeWidth="@dimen/_1sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_input_gender">
+
+            <TextView
+                android:id="@+id/input_major"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                android:background="@color/transparent"
+                android:fontFamily="@font/yekan_bakh_regular"
+                android:gravity="center"
+                android:hint="@string/major"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/hint"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </carbon.widget.ConstraintLayout>
+
+        <carbon.widget.ConstraintLayout
+            android:id="@+id/layout_register_student"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginRight="@dimen/_12sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:background="@color/colorPrimary"
+            android:layoutDirection="ltr"
+            app:carbon_cornerRadius="@dimen/_18sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_input_major">
+
+            <carbon.widget.TextView
+                android:id="@+id/text_register_student"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fontFamily="@font/yekan_bakh_semi_bold"
+                android:gravity="center"
+                android:layoutDirection="ltr"
+                android:text="@string/register_student"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_11ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:layoutDirection="ltr"
+                android:visibility="invisible"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/animation_loading" />
+        </carbon.widget.ConstraintLayout>
+    </carbon.widget.ConstraintLayout>
+
+    <carbon.widget.Button
+        android:id="@+id/button_student_list"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginLeft="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginRight="@dimen/_12sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:background="@color/white"
+        android:fontFamily="@font/yekan_bakh_semi_bold"
+        android:text="@string/student_list"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12ssp"
+        android:visibility="visible"
+        app:carbon_cornerRadius="@dimen/_18sdp"
+        app:carbon_stroke="@color/stroke"
+        app:carbon_strokeWidth="@dimen/_1sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

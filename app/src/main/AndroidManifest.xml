@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EduRegister"
         tools:ignore="DiscouragedApi,LockedOrientationActivity"
+        tools:replace="android:label"
         tools:targetApi="31">
         <activity
             android:name=".ui.activity.RegisterStudentActivity"

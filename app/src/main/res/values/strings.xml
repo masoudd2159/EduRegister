@@ -5,12 +5,14 @@
 
     <string name="app_version">Version %1$s</string>
     <string name="birthdate_placeholder">تاریخ تولد: %1$s</string>
+    <string name="brithdate">تاریخ تولد</string>
     <string name="connection_fail">مشکلی در اتصال به اینترنت به وجود آمده!</string>
     <string name="email">ایمیل</string>
     <string name="email_error">لطفاً ایمیل را به درستی وارد کنید !</string>
     <string name="exit_toast_message">برای خروج از برنامه دو بار کلید بازگشت را فشار دهید !</string>
     <string name="family">نام خانوادگی</string>
     <string name="family_error">لطفاً نام خانوادگی خود را به درستی وارد کنید !</string>
+    <string name="gender">جنسیت</string>
     <string name="hint_email">ایمیل :</string>
     <string name="hint_password">رمزعبور:</string>
     <string name="log_out_account_text">شما در حال خروج از حساب کاربری خود هستید.آیا اطمینان دارید؟</string>
@@ -18,6 +20,7 @@
     <string name="login_into_app">ورود به اپلیکیشن</string>
     <string name="login_to_system">ورود به سامانه</string>
     <string name="login_user"><u>قبلاً ثبت نام کردید؟  ورود به سامانه</u></string>
+    <string name="major">رشته تحصیلی</string>
     <string name="major_placeholder">رشته تحصیلی: %1$s</string>
     <string name="name">نام</string>
     <string name="name_error">لطفاً نام خود را به درستی وارد کنید !</string>
@@ -26,6 +29,8 @@
     <string name="password">رمزعبور</string>
     <string name="password_error">لطفاً پسورد را به درستی وارد کنید !</string>
     <string name="register">ثبت نام</string>
+    <string name="register_new_student">ثبت نام دانش‌آموز جدید</string>
+    <string name="register_student">ثبت نام دانش‌آموز</string>
     <string name="register_successfully">ثبت نام شما با موفقیت انجام شد. لطفاً پس از وارد کردن ایمیل و رمزعبور خود از سامانه استفاده کنید.</string>
     <string name="register_user"><u>نام کاربری ندارید؟  ثبت نام</u></string>
     <string name="registration_hint">لطفاً برای ثبت نام اطلاعات زیر را تکمیل کنید.</string>
@@ -35,4 +40,11 @@
     <string name="user_registration">ثبت نام کاربر</string>
     <string name="username_error">لطفاً نام کاربری را به درستی وارد کنید !</string>
     <string name="yes">بله</string>
+    <string name="choose_one_text">از میان موارد زیر یکی را انتخاب کنید.</string>
+    <string name="submit">تایید</string>
+    <string name="error_student_firstname">نام دانش‌آموز را وارد کنید!</string>
+    <string name="error_student_lastname">نام خانوادگی دانش‌آموز را وارد کنید!</string>
+    <string name="error_student_brith_date">تاریخ تولد دانش‌آموز را انتخاب کنید!</string>
+    <string name="error_student_gender">جنسیت دانش‌آموز را انتخاب کنید!</string>
+    <string name="error_student_major">رشته ی تحصیلی دانش‌آموز را انتخاب کنید!</string>
 </resources>

@@ -15,8 +15,8 @@ android {
         buildToolsVersion = "35.0.0"
         minSdk = 28
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0.1"
+        versionCode = 14
+        versionName = "1.0.14"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
@@ -77,6 +77,7 @@ dependencies {
     implementation(libs.sdp.android)
     implementation(libs.ssp.android)
     implementation(libs.icu4j)
+    implementation(libs.persian.date.picker.dialog)
 
     ksp(libs.ksp)
     ksp(libs.hilt.compiler)
