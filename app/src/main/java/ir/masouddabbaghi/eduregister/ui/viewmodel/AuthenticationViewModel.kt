@@ -7,6 +7,9 @@ import ir.masouddabbaghi.eduregister.data.model.Login
 import ir.masouddabbaghi.eduregister.data.model.requestBody.LoginBody
 import ir.masouddabbaghi.eduregister.data.model.requestBody.RegisterBody
 import ir.masouddabbaghi.eduregister.data.repository.AuthRepository
+import ir.masouddabbaghi.eduregister.data.storage.SharedPreferencesHelper
+import ir.masouddabbaghi.eduregister.data.storage.SharedPreferencesKeys.KEY_EMAIL
+import ir.masouddabbaghi.eduregister.data.storage.SharedPreferencesKeys.KEY_PASSWORD
 import ir.masouddabbaghi.eduregister.network.NetworkResult
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,6 +22,7 @@ class AuthenticationViewModel
     @Inject
     constructor(
         private val authRepository: AuthRepository,
+        private val sharedPreferencesHelper: SharedPreferencesHelper,
     ) : ViewModel() {
         private val _loginResponse = MutableStateFlow<NetworkResult<Login>>(NetworkResult.Loading(isLoading = false))
         val loginResponse: StateFlow<NetworkResult<Login>> = _loginResponse.asStateFlow()
@@ -27,8 +31,8 @@ class AuthenticationViewModel
         val registerResponse: StateFlow<NetworkResult<String>> = _registerResponse.asStateFlow()
 
         fun fetchLogin(
-            email: String,
-            password: String,
+            email: String = sharedPreferencesHelper.getString(key = KEY_EMAIL, defaultValue = ""),
+            password: String = sharedPreferencesHelper.getString(key = KEY_PASSWORD, defaultValue = ""),
         ) {
             _loginResponse.value = NetworkResult.Loading(isLoading = true)
             viewModelScope.launch {
@@ -41,6 +45,8 @@ class AuthenticationViewModel
                             ),
                     ).collect { result ->
                         _loginResponse.value = result
+                        sharedPreferencesHelper.saveString(KEY_EMAIL, email)
+                        sharedPreferencesHelper.saveString(KEY_PASSWORD, password)
                     }
             }
         }
