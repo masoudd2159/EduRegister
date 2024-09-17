@@ -12,12 +12,14 @@
     <string name="family_error">لطفاً نام خانوادگی خود را به درستی وارد کنید !</string>
     <string name="hint_email">ایمیل :</string>
     <string name="hint_password">رمزعبور:</string>
+    <string name="log_out_account_text">شما در حال خروج از حساب کاربری خود هستید.آیا اطمینان دارید؟</string>
     <string name="login_hint">لطفاً برای ورود به سامانه نام کاربری و رمزعبور خود را وارد کنید.</string>
     <string name="login_into_app">ورود به اپلیکیشن</string>
     <string name="login_to_system">ورود به سامانه</string>
     <string name="login_user"><u>قبلاً ثبت نام کردید؟  ورود به سامانه</u></string>
     <string name="name">نام</string>
     <string name="name_error">لطفاً نام خود را به درستی وارد کنید !</string>
+    <string name="no">خیر</string>
     <string name="password">رمزعبور</string>
     <string name="password_error">لطفاً پسورد را به درستی وارد کنید !</string>
     <string name="register">ثبت نام</string>
@@ -28,4 +30,5 @@
     <string name="server_error_hint">هم اکنون سامانه با اختلال مواجه است. لطفا چند دقیقه دیگر تلاش کنید.</string>
     <string name="user_registration">ثبت نام کاربر</string>
     <string name="username_error">لطفاً نام کاربری را به درستی وارد کنید !</string>
+    <string name="yes">بله</string>
 </resources>

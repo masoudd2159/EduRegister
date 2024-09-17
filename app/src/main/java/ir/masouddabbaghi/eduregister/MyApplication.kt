@@ -29,13 +29,12 @@ class MyApplication : MultiDexApplication() {
     }
 
     private fun showToast(message: String) {
-        toast?.cancel() // Cancel any existing toast
+        toast?.cancel()
         toast = Toast.makeText(this, message, Toast.LENGTH_LONG)
         toast?.show()
     }
 
     companion object {
-        const val FONT_YEKAN_BAKH_SEMI_BOLD: String = "fonts/yekan_bakh_semi_bold.ttf"
         const val BASE_URL = "https://serv.steelchat.ir/sma/"
         private const val DEBOUNCE_DELAY = 2000L // 2 seconds
         private lateinit var appInstance: MyApplication

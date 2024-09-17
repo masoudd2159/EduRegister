@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<carbon.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="@dimen/_6sdp"
+    app:carbon_cornerRadiusTopEnd="@dimen/_16sdp"
+    app:carbon_cornerRadiusTopStart="@dimen/_16sdp">
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_6sdp"
+        android:fontFamily="@font/yekan_bakh_regular"
+        android:gravity="center"
+        android:text="@string/log_out_account_text"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <carbon.widget.Button
+        android:id="@+id/button_no"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginLeft="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginRight="@dimen/_6sdp"
+        android:layout_marginBottom="@dimen/_6sdp"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/yekan_bakh_bold"
+        android:text="@string/no"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
+        app:carbon_cornerRadius="@dimen/_18sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/button_yes"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description" />
+
+    <carbon.widget.Button
+        android:id="@+id/button_yes"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginLeft="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginRight="@dimen/_6sdp"
+        android:layout_marginBottom="@dimen/_6sdp"
+        android:background="@color/white"
+        android:fontFamily="@font/yekan_bakh_bold"
+        android:text="@string/yes"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12ssp"
+        app:carbon_cornerRadius="@dimen/_18sdp"
+        app:carbon_stroke="@color/stroke"
+        app:carbon_strokeWidth="@dimen/_1sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/button_no"
+        app:layout_constraintTop_toBottomOf="@id/description" />
+
+</carbon.widget.ConstraintLayout>
