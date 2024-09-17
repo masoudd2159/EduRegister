@@ -28,11 +28,11 @@ class AuthInterceptor
         private fun getAccessTokenFromSharedPreferences(chain: Interceptor.Chain): String {
             val accessTokenPreferences = sharedPreferencesHelper.getString(KEY_ACCESS_TOKEN, "")
             return if (accessTokenPreferences.isEmpty()) {
-                Log.w("VistaTeam : ${AuthInterceptor::class.java.simpleName}", "Access Token is null in this activity")
+                Log.w(AuthInterceptor::class.java.simpleName, "Access Token is null in this activity")
                 ""
             } else {
                 Log.i(
-                    "VistaTeam : ${AuthInterceptor::class.java.simpleName}",
+                    AuthInterceptor::class.java.simpleName,
                     "Access Token for this activity is : $accessTokenPreferences for this URL ${getServiceURL(chain.request())}",
                 )
                 accessTokenPreferences

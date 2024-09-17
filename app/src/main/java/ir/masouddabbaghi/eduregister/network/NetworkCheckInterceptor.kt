@@ -14,7 +14,7 @@ class NetworkCheckInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         if (!isNetworkAvailable()) {
             Log.w(
-                "VistaTeam : ${NetworkCheckInterceptor::class.java.simpleName}",
+                NetworkCheckInterceptor::class.java.simpleName,
                 "No Internet Connection in This Activity : ${applicationContext().javaClass.simpleName}",
             )
             val myApplication = applicationContext().applicationContext as MyApplication

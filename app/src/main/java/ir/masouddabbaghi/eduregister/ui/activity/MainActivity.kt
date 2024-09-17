@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -40,7 +41,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var dialog: Dialog
 
     private val mainActivityViewModel: MainActivityViewModel by viewModels()
     private val authenticationViewModel: AuthenticationViewModel by viewModels()
@@ -63,6 +63,13 @@ class MainActivity : BaseActivity() {
         return binding.root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setupObservers()
+        setupUI()
+        setupBackPressedHandler()
+    }
+
     override fun onStart() {
         super.onStart()
         mainActivityViewModel.fetchSlider()
@@ -70,60 +77,51 @@ class MainActivity : BaseActivity() {
         authenticationViewModel.fetchLogin()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding.apply {
-            mainActivityViewModel.sliderResponse.observe(this@MainActivity) { sliderResult ->
-                sliderAdapter.updateItems(sliderResult.result)
-                viewPager.adapter = sliderAdapter
-                dotsIndicator.attachTo(viewPager)
-                startAutoSlide(sliderResult.result)
+    private fun setupUI() {
+        binding.recyclerViewProfile.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = homeListAdapter
+        }
+    }
+
+    private fun setupObservers() {
+        observeSliderResponse()
+        observeLoginResponse()
+    }
+
+    private fun observeSliderResponse() {
+        mainActivityViewModel.sliderResponse.observe(this) { sliderResult ->
+            sliderResult.result.let { sliders ->
+                sliderAdapter.updateItems(sliders)
+                binding.viewPager.adapter = sliderAdapter
+                binding.dotsIndicator.attachTo(binding.viewPager)
+                startAutoSlide(sliders)
             }
+        }
+    }
 
-            lifecycleScope.launch {
-                lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    authenticationViewModel.loginResponse.collect { loginResult ->
-                        when (loginResult) {
-                            is NetworkResult.Loading ->
-                                Log.i(
-                                    javaClass.simpleName,
-                                    "Login NetworkResult Loading Status -> ${loginResult.isLoading}",
-                                )
+    private fun observeLoginResponse() {
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                authenticationViewModel.loginResponse.collect { loginResult ->
+                    when (loginResult) {
+                        is NetworkResult.Loading ->
+                            Log.i(
+                                javaClass.simpleName,
+                                "Login NetworkResult Loading Status -> ${loginResult.isLoading}",
+                            )
 
-                            is NetworkResult.Failure ->
-                                Log.e(
-                                    javaClass.simpleName,
-                                    "Login NetworkResult Failure Message -> ${loginResult.errorMessage}",
-                                )
+                        is NetworkResult.Failure ->
+                            Log.e(
+                                javaClass.simpleName,
+                                "Login NetworkResult Failure Message -> ${loginResult.errorMessage}",
+                            )
 
-                            is NetworkResult.Success -> {
-                                Log.i(javaClass.simpleName, "Login NetworkResult Success Data -> ${loginResult.data}")
-                                sharedPreferencesHelper.saveString(KEY_ACCESS_TOKEN, loginResult.data.token)
-
-                                mainActivityViewModel.homeListResponse.observe(this@MainActivity) { homeListResult ->
-                                    recyclerViewProfile.setHasFixedSize(true)
-                                    recyclerViewProfile.layoutManager =
-                                        LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
-                                    recyclerViewProfile.adapter = homeListAdapter
-                                    homeListAdapter.setItemClickInterface { homeListItem ->
-                                        when (homeListItem.id) {
-                                            1 ->
-                                                Toast
-                                                    .makeText(
-                                                        this@MainActivity,
-                                                        resources.getString(R.string.next_features),
-                                                        Toast.LENGTH_SHORT,
-                                                    ).show()
-
-                                            2 -> startActivity(Intent(this@MainActivity, StudentListActivity::class.java))
-                                            3 -> startActivity(Intent(this@MainActivity, RegisterStudentActivity::class.java))
-                                            4 -> showLogoutDialog()
-                                            else -> Toast.makeText(this@MainActivity, homeListItem.title, Toast.LENGTH_SHORT).show()
-                                        }
-                                    }
-                                    homeListAdapter.updateItems(homeListResult.result)
-                                }
-                            }
+                        is NetworkResult.Success -> {
+                            Log.i(javaClass.simpleName, "Login NetworkResult Success Data -> $loginResult")
+                            sharedPreferencesHelper.saveString(KEY_ACCESS_TOKEN, loginResult.data.token)
+                            observeHomeListResponse()
                         }
                     }
                 }
@@ -131,54 +129,122 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun startAutoSlide(sliderModel: List<Slider.Result>) {
+    private fun observeHomeListResponse() {
+        mainActivityViewModel.homeListResponse.observe(this) { homeListResult ->
+            homeListResult.result.let { homeList ->
+                homeListAdapter.updateItems(homeList)
+                setupHomeListClickListener()
+            }
+        }
+    }
+
+    private fun setupHomeListClickListener() {
+        homeListAdapter.setItemClickInterface { homeListItem ->
+            when (homeListItem.id) {
+                1 -> Toast.makeText(this@MainActivity, getString(R.string.next_features), Toast.LENGTH_SHORT).show()
+                2 -> startActivity(Intent(this@MainActivity, StudentListActivity::class.java))
+                3 -> startActivity(Intent(this@MainActivity, RegisterStudentActivity::class.java))
+                4 -> showLogoutDialog()
+                else -> Toast.makeText(this@MainActivity, homeListItem.title, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun setupBackPressedHandler() {
+        onBackPressedDispatcher.addCallback(this, backPressCallback)
+    }
+
+    private val backPressCallback =
+        object : OnBackPressedCallback(true) {
+            private var doubleBackToExitPressedOnce = false
+
+            override fun handleOnBackPressed() {
+                if (doubleBackToExitPressedOnce) {
+                    isEnabled = false
+                    finish()
+                    finishAffinity()
+                    return
+                }
+
+                doubleBackToExitPressedOnce = true
+                Toast
+                    .makeText(
+                        this@MainActivity,
+                        getString(R.string.exit_toast_message),
+                        Toast.LENGTH_SHORT,
+                    ).show()
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    doubleBackToExitPressedOnce = false
+                }, 2000)
+            }
+        }
+
+    private fun startAutoSlide(sliders: List<Slider.Result>) {
         Log.i(tagLog, "Start Auto Slide")
         val handler = Handler(Looper.getMainLooper())
 
-        timer = Timer()
-        timer?.schedule(
-            object : TimerTask() {
-                override fun run() {
-                    handler.post {
-                        currentPage = if (currentPage == sliderModel.size - 1) 0 else currentPage + 1
-                        binding.viewPager.setCurrentItem(currentPage, true)
-                    }
-                }
-            },
-            delay,
-            delay,
-        )
+        timer =
+            Timer().apply {
+                schedule(
+                    object : TimerTask() {
+                        override fun run() {
+                            handler.post {
+                                currentPage = if (currentPage == sliders.size - 1) 0 else currentPage + 1
+                                binding.viewPager.setCurrentItem(currentPage, true)
+                            }
+                        }
+                    },
+                    delay,
+                    delay,
+                )
+            }
     }
 
     private fun showLogoutDialog() {
-        dialog = Dialog(this@MainActivity, R.style.Theme_Dialog)
-        val dialogBinding = DialogLogoutBinding.inflate(layoutInflater)
+        Dialog(this@MainActivity, R.style.Theme_Dialog).also { dialog ->
+            val dialogBinding = DialogLogoutBinding.inflate(layoutInflater)
+            dialog.setContentView(dialogBinding.root)
+            configureDialogWindow(dialog)
+            setupLogoutDialogButtons(dialog, dialogBinding)
+            dialog.show()
+        }
+    }
 
-        dialog.window?.also {
-            (it.decorView as ViewGroup).getChildAt(0).startAnimation(AnimationUtils.loadAnimation(this@MainActivity, R.anim.slide_up))
-            val layoutParams = it.attributes
+    private fun configureDialogWindow(dialog: Dialog) {
+        dialog.window?.apply {
+            (decorView as ViewGroup).getChildAt(0).startAnimation(
+                AnimationUtils.loadAnimation(this@MainActivity, R.anim.slide_up),
+            )
+            val layoutParams = attributes
             layoutParams.dimAmount = 0.7f
             layoutParams.gravity = Gravity.BOTTOM
-            it.setGravity(Gravity.BOTTOM)
-            it.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-            it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            it.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             layoutParams.windowAnimations = R.style.DialogAnimation
         }
-        dialog.setContentView(dialogBinding.root)
         dialog.setCanceledOnTouchOutside(true)
+    }
 
+    private fun setupLogoutDialogButtons(
+        dialog: Dialog,
+        dialogBinding: DialogLogoutBinding,
+    ) {
         dialogBinding.buttonYes.setOnClickListener {
             sharedPreferencesHelper.clearSharedPreferences()
             startActivity(Intent(this@MainActivity, SplashScreenActivity::class.java))
-            this@MainActivity.finishAffinity()
+            finishAffinity()
             dialog.dismiss()
         }
 
         dialogBinding.buttonNo.setOnClickListener {
             dialog.dismiss()
         }
+    }
 
-        dialog.show()
+    override fun onDestroy() {
+        super.onDestroy()
+        timer?.cancel()
     }
 }

@@ -36,7 +36,7 @@ class MyApplication : MultiDexApplication() {
 
     companion object {
         const val BASE_URL = "https://serv.steelchat.ir/sma/"
-        private const val DEBOUNCE_DELAY = 2000L // 2 seconds
+        private const val DEBOUNCE_DELAY = 2_000L
         private lateinit var appInstance: MyApplication
 
         fun applicationContext(): Context = appInstance.applicationContext

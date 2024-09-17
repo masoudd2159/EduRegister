@@ -5,10 +5,16 @@
 
     <string name="app_version">Version %1$s</string>
     <string name="birthdate_placeholder">تاریخ تولد: %1$s</string>
-    <string name="brithdate">تاریخ تولد</string>
+    <string name="brith_date">تاریخ تولد</string>
+    <string name="choose_one_text">از میان موارد زیر یکی را انتخاب کنید.</string>
     <string name="connection_fail">مشکلی در اتصال به اینترنت به وجود آمده!</string>
     <string name="email">ایمیل</string>
     <string name="email_error">لطفاً ایمیل را به درستی وارد کنید !</string>
+    <string name="error_student_brith_date">تاریخ تولد دانش‌آموز را انتخاب کنید!</string>
+    <string name="error_student_firstname">نام دانش‌آموز را وارد کنید!</string>
+    <string name="error_student_gender">جنسیت دانش‌آموز را انتخاب کنید!</string>
+    <string name="error_student_lastname">نام خانوادگی دانش‌آموز را وارد کنید!</string>
+    <string name="error_student_major">رشته ی تحصیلی دانش‌آموز را انتخاب کنید!</string>
     <string name="exit_toast_message">برای خروج از برنامه دو بار کلید بازگشت را فشار دهید !</string>
     <string name="family">نام خانوادگی</string>
     <string name="family_error">لطفاً نام خانوادگی خود را به درستی وارد کنید !</string>
@@ -37,14 +43,8 @@
     <string name="repeat_password">تکرار رمز عبور</string>
     <string name="server_error_hint">هم اکنون سامانه با اختلال مواجه است. لطفا چند دقیقه دیگر تلاش کنید.</string>
     <string name="student_list">لیست دانش‌آموزان</string>
+    <string name="submit">تایید</string>
     <string name="user_registration">ثبت نام کاربر</string>
     <string name="username_error">لطفاً نام کاربری را به درستی وارد کنید !</string>
     <string name="yes">بله</string>
-    <string name="choose_one_text">از میان موارد زیر یکی را انتخاب کنید.</string>
-    <string name="submit">تایید</string>
-    <string name="error_student_firstname">نام دانش‌آموز را وارد کنید!</string>
-    <string name="error_student_lastname">نام خانوادگی دانش‌آموز را وارد کنید!</string>
-    <string name="error_student_brith_date">تاریخ تولد دانش‌آموز را انتخاب کنید!</string>
-    <string name="error_student_gender">جنسیت دانش‌آموز را انتخاب کنید!</string>
-    <string name="error_student_major">رشته ی تحصیلی دانش‌آموز را انتخاب کنید!</string>
 </resources>

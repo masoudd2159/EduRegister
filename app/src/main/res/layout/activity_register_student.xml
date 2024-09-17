@@ -150,7 +150,7 @@
                 android:background="@color/transparent"
                 android:fontFamily="@font/yekan_bakh_regular"
                 android:gravity="center"
-                android:hint="@string/brithdate"
+                android:hint="@string/brith_date"
                 android:onClick="showCalendar"
                 android:textColor="@color/black"
                 android:textColorHint="@color/hint"
