@@ -21,6 +21,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import ir.masouddabbaghi.eduregister.R
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 object Tools {
     fun directLinkToBrowser(
@@ -171,5 +173,12 @@ object Tools {
                 Log.w(javaClass.simpleName, "URL is empty")
             }
         }
+    }
+
+    fun formatBirthdayDate(serverDate: String): String {
+        val serverDateFormat = SimpleDateFormat("M/d/yyyy hh:mm:ss a", Locale.US) // Matches "6/1/1996 12:00:00 AM"
+        val outputDateFormat = SimpleDateFormat("yyyy/MM/dd", Locale.US) // Desired output: "1996/01/06"
+        val date = serverDateFormat.parse(serverDate)
+        return outputDateFormat.format(date!!)
     }
 }

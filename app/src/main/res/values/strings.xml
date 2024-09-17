@@ -4,6 +4,7 @@
     <string name="app_description">اپلیکیشن ثبت نام دانش آموزان</string>
 
     <string name="app_version">Version %1$s</string>
+    <string name="birthdate_placeholder">تاریخ تولد: %1$s</string>
     <string name="connection_fail">مشکلی در اتصال به اینترنت به وجود آمده!</string>
     <string name="email">ایمیل</string>
     <string name="email_error">لطفاً ایمیل را به درستی وارد کنید !</string>
@@ -17,8 +18,10 @@
     <string name="login_into_app">ورود به اپلیکیشن</string>
     <string name="login_to_system">ورود به سامانه</string>
     <string name="login_user"><u>قبلاً ثبت نام کردید؟  ورود به سامانه</u></string>
+    <string name="major_placeholder">رشته تحصیلی: %1$s</string>
     <string name="name">نام</string>
     <string name="name_error">لطفاً نام خود را به درستی وارد کنید !</string>
+    <string name="next_features">این بخش در آپدیت های بعدی به پروژه اضافه خواهد شد.</string>
     <string name="no">خیر</string>
     <string name="password">رمزعبور</string>
     <string name="password_error">لطفاً پسورد را به درستی وارد کنید !</string>
@@ -28,6 +31,7 @@
     <string name="registration_hint">لطفاً برای ثبت نام اطلاعات زیر را تکمیل کنید.</string>
     <string name="repeat_password">تکرار رمز عبور</string>
     <string name="server_error_hint">هم اکنون سامانه با اختلال مواجه است. لطفا چند دقیقه دیگر تلاش کنید.</string>
+    <string name="student_list">لیست دانش‌آموزان</string>
     <string name="user_registration">ثبت نام کاربر</string>
     <string name="username_error">لطفاً نام کاربری را به درستی وارد کنید !</string>
     <string name="yes">بله</string>

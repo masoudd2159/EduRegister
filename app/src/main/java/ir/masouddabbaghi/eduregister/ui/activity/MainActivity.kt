@@ -73,22 +73,6 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.apply {
-            mainActivityViewModel.homeListResponse.observe(this@MainActivity) { homeListResult ->
-                recyclerViewProfile.setHasFixedSize(true)
-                recyclerViewProfile.layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
-                recyclerViewProfile.adapter = homeListAdapter
-                homeListAdapter.setItemClickInterface { homeListItem ->
-                    when (homeListItem.id) {
-                        1 -> {}
-                        2 -> {}
-                        3 -> {}
-                        4 -> showLogoutDialog()
-                        else -> Toast.makeText(this@MainActivity, homeListItem.title, Toast.LENGTH_SHORT).show()
-                    }
-                }
-                homeListAdapter.updateItems(homeListResult.result)
-            }
-
             mainActivityViewModel.sliderResponse.observe(this@MainActivity) { sliderResult ->
                 sliderAdapter.updateItems(sliderResult.result)
                 viewPager.adapter = sliderAdapter
@@ -115,6 +99,30 @@ class MainActivity : BaseActivity() {
                             is NetworkResult.Success -> {
                                 Log.i(javaClass.simpleName, "Login NetworkResult Success Data -> ${loginResult.data}")
                                 sharedPreferencesHelper.saveString(KEY_ACCESS_TOKEN, loginResult.data.token)
+
+                                mainActivityViewModel.homeListResponse.observe(this@MainActivity) { homeListResult ->
+                                    recyclerViewProfile.setHasFixedSize(true)
+                                    recyclerViewProfile.layoutManager =
+                                        LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
+                                    recyclerViewProfile.adapter = homeListAdapter
+                                    homeListAdapter.setItemClickInterface { homeListItem ->
+                                        when (homeListItem.id) {
+                                            1 ->
+                                                Toast
+                                                    .makeText(
+                                                        this@MainActivity,
+                                                        resources.getString(R.string.next_features),
+                                                        Toast.LENGTH_SHORT,
+                                                    ).show()
+
+                                            2 -> startActivity(Intent(this@MainActivity, StudentListActivity::class.java))
+                                            3 -> startActivity(Intent(this@MainActivity, RegisterStudentActivity::class.java))
+                                            4 -> showLogoutDialog()
+                                            else -> Toast.makeText(this@MainActivity, homeListItem.title, Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
+                                    homeListAdapter.updateItems(homeListResult.result)
+                                }
                             }
                         }
                     }
